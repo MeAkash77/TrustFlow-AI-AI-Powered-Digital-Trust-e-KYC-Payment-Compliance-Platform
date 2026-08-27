@@ -65,6 +65,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
       let userData: any = null
 
       if (!isLoggedIn) {
+        // This line stays exactly as is - it will use apiBase from App.tsx
         const authResponse = await fetch(`${apiBase}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
