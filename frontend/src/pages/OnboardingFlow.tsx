@@ -104,7 +104,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
       }
 
       // Step 3: Create session via authenticated API
-      const sessionResponse = await AuthService.apiCall(`${apiBase}/api/sessions`, {
+      const sessionResponse = await AuthService.apiCall(`/api/sessions`, {
         method: 'POST',
         body: JSON.stringify({
           ...formData,
@@ -123,7 +123,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
 
       // Step 4: Validate location via KYC service
       try {
-        await AuthService.apiCall(`${apiBase}/api/kyc/validate-location`, {
+        await AuthService.apiCall(`/api/kyc/validate-location`, {
           method: 'POST',
           body: JSON.stringify({
             sessionId: sessionData.sessionId,
@@ -136,7 +136,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
 
       // Step 5: Record initial consent
       try {
-        await AuthService.apiCall(`${apiBase}/api/kyc/consent`, {
+        await AuthService.apiCall(`/api/kyc/consent`, {
           method: 'POST',
           body: JSON.stringify({
             sessionId: sessionData.sessionId,
@@ -169,7 +169,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
       // Step 1: Send transcript to real STT for keyword extraction
       let sttResult: any = {}
       try {
-        const sttResponse = await AuthService.apiCall(`${apiBase}/api/stt/transcribe`, {
+        const sttResponse = await AuthService.apiCall(`/api/stt/transcribe`, {
           method: 'POST',
           body: JSON.stringify({
             sessionId: session.sessionId,
@@ -181,7 +181,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
 
       // Step 2: Record verbal consent
       try {
-        await AuthService.apiCall(`${apiBase}/api/kyc/consent`, {
+        await AuthService.apiCall(`/api/kyc/consent`, {
           method: 'POST',
           body: JSON.stringify({
             sessionId: session.sessionId,
@@ -192,7 +192,7 @@ export const OnboardingFlow: React.FC<Props> = ({ session, updateSession, goToOf
       } catch { }
 
       // Step 3: Run full pipeline (LLM → Risk → Offers) through API Gateway
-      const pipelineResponse = await AuthService.apiCall(`${apiBase}/api/sessions/${session.sessionId}/process`, {
+      const pipelineResponse = await AuthService.apiCall(`/api/sessions/${session.sessionId}/process`, {
         method: 'POST',
         body: JSON.stringify({
           transcript,
