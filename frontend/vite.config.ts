@@ -7,12 +7,14 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://trustflow-ai-ai-powered-digital-trust-e.onrender.com',
         changeOrigin: true,
+        secure: true,
       },
       '/socket.io': {
-        target: 'http://localhost:3001',
+        target: 'https://trustflow-ai-ai-powered-digital-trust-e.onrender.com',
         changeOrigin: true,
+        secure: true,
         ws: true,
       },
     },
