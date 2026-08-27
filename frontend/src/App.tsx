@@ -3,8 +3,8 @@ import OnboardingFlow from './pages/OnboardingFlow'
 import LoanOffers from './pages/LoanOffers'
 import './index.css'
 
-// API base URL — uses Vite proxy in dev, direct URL in production
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// API Gateway
+const API_BASE = 'https://trustflow-ai-ai-powered-digital-trust-e.onrender.com';
 
 // ===========================
 // AUTH SERVICE
